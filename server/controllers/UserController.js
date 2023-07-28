@@ -1,10 +1,10 @@
 const User = require("../models/User");
+const ErrorHandler = require("../utils/ErrorHandler");
 
 
 
-
-exports.registerUser = async (req, res) => {
-
+exports.registerUser = async (req, res, next) => {
+    
 }
 
 exports.loginUser = async (req, res) => {
