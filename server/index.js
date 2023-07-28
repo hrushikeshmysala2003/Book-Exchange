@@ -1,6 +1,7 @@
-const express = require('express');
-const app = express();
+const app=require("./app");
 const port = process.env.PORT || 5000;
+
+
 const connetToDB = require('./db');
 
 connetToDB().then(()=>{
@@ -10,3 +11,4 @@ connetToDB().then(()=>{
 }).catch((err)=>{
     throw err;
 })
+
