@@ -57,8 +57,46 @@ exports.registerUser = async (req, res, next) => {
     }
 }
 
-exports.loginUser = async (req, res) => {
+exports.loginUser = async (req, res, next) => {
+    const {email, userPassword} = req.body;
+    console.log(req.body);
 
+    if(!email || !userPassword) return next(new ErrorHandler("Please enter all fields", 400));
+
+    const user = await User.findOne({email: email}).select("+password");
+
+    console.log(user)
+
+    if(!user) return next(new ErrorHandler("User not found", 401));
+
+    const isAuthenticated = user.comparePassword(userPassword);
+
+    if(!isAuthenticated) return next(new ErrorHandler("Password did not match", 401));
+
+    const token = user.getJwtToken();
+
+    const options = {
+        httpOnly: true,
+        expires: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000),
+        sameSite: "none"
+    }
+
+    res.status(200).cookie("token", token, options).json({
+        success: true,
+        message: "User Logged In",
+    })
+
+}
+
+exports.logoutUser = (req, res) => {
+    res.status(200).cookie("token", null, {
+        expires: new Date(Date.now()),
+        sameSite: "none", 
+        httpOnly: true,
+    }).json({
+        success: true,
+        message: "Logged out Successfully"
+})
 }
 
 exports.demoUser = (req, res) => {
