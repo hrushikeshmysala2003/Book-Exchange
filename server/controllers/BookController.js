@@ -39,3 +39,24 @@ exports.addBook=async(req,res,next)=>{
         return next(new ErrorHandler(error.message, null));
     }
 }
+
+exports.deleteBook = async (req,res,next)=>{
+    const book_id = req.params.id;
+    try {
+        const book=await Book.findByIdAndDelete({_id:book_id});
+        if(book){
+        res.status(202).json({
+            success: true,
+            message: "Book deleted Successfully",
+            book, 
+        })}else{
+            return res.status(404).json({
+                success:false,
+                message: "Book does not found",
+            })
+        }
+    } catch (error) {
+        return next(new ErrorHandler(error.message, null));
+    }
+
+}
