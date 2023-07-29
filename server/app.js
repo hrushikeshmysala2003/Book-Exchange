@@ -7,7 +7,9 @@ app.use(express.urlencoded({
     extended: true
 }));
 const user=require("./routes/UserRoutes");
+const book=require("./routes/book");
 app.use("/api/v1", user)
+app.use("/api/v1", book)
 
 
 app.use(errorMiddleware);
