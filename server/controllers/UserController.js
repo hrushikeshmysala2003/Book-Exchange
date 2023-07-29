@@ -1,6 +1,7 @@
 const User = require("../models/User");
 const ErrorHandler = require("../utils/ErrorHandler");
-
+const getDataUri = require("../utils/DataUri");
+const cloudinary = require("cloudinary").v2;
 
 
 exports.registerUser = async (req, res, next) => {
