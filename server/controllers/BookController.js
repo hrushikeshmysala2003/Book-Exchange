@@ -16,7 +16,7 @@ exports.addBook=async(req,res,next)=>{
         const fileUri = getDataUri(file);
         const mycloud = await cloudinary.uploader.upload(fileUri.content);
         
-        const user = await User.findById({id});
+        // const user = await User.findById({id});
         const book=await Book.create({
             title,
             author,
@@ -27,15 +27,15 @@ exports.addBook=async(req,res,next)=>{
             category,
             description,
             status:"new",
-            user:user._id
+            user:id
         })
 
         res.status(201).json({
             success: true,
             message: "Book added Successfully",
-            user, 
+            book, 
         })
     } catch (error) {
-        return next(new ErrorHandler(err.message, null));
+        return next(new ErrorHandler(error.message, null));
     }
 }
