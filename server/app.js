@@ -6,12 +6,11 @@ const errorMiddleware = require("./middlewares/Error")
 
 
 app.use(express.json());
-app.use(cookieParser());
 app.use(express.urlencoded({
     extended: true
 }));
 
-
+app.use(cookieParser());
 
 const user=require("./routes/UserRoutes");
 const book=require("./routes/book");

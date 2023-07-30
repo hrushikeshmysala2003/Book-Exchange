@@ -2,7 +2,7 @@ const User = require("../models/User");
 const ErrorHandler = require("../utils/ErrorHandler");
 const getDataUri = require("../utils/DataUri");
 const cloudinary = require("cloudinary").v2;
-
+const jwt = require("jsonwebtoken");
 
 exports.registerUser = async (req, res, next) => {
     try {
@@ -58,33 +58,35 @@ exports.registerUser = async (req, res, next) => {
 }
 
 exports.loginUser = async (req, res, next) => {
-    const {email, userPassword} = req.body;
-    console.log(req.body);
+    try {
+        const {email, userPassword} = req.body;
 
-    if(!email || !userPassword) return next(new ErrorHandler("Please enter all fields", 400));
+        if(!email || !userPassword) return next(new ErrorHandler("Please enter all fields", 400));
 
-    const user = await User.findOne({email: email}).select("+password");
+        const user = await User.findOne({email: email}).select("+password");
 
-    console.log(user)
 
-    if(!user) return next(new ErrorHandler("User not found", 401));
+        if(!user) return next(new ErrorHandler("User not found", 401));
 
-    const isAuthenticated = user.comparePassword(userPassword);
+        const isAuthenticated = user.comparePassword(userPassword);
 
-    if(!isAuthenticated) return next(new ErrorHandler("Password did not match", 401));
+        if(!isAuthenticated) return next(new ErrorHandler("Password did not match", 401));
 
-    const token = user.getJwtToken();
+        const token = await user.getJwtToken();
 
-    const options = {
-        httpOnly: true,
-        expires: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000),
-        sameSite: "none"
+        const options = {
+            httpOnly: true,
+            expires: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000),
+            sameSite: "none"
+        }
+
+        res.status(200).cookie("token", token, options).json({
+            success: true,
+            message: "User Logged In",
+        })
+    } catch (error) {
+        return next(new ErrorHandler(error.message, null))
     }
-
-    res.status(200).cookie("token", token, options).json({
-        success: true,
-        message: "User Logged In",
-    })
 
 }
 
@@ -96,12 +98,58 @@ exports.logoutUser = (req, res) => {
     }).json({
         success: true,
         message: "Logged out Successfully"
-})
+    })
 }
 
-exports.demoUser = (req, res) => {
+exports.getMyProfile = async (req, res, next) => {
+    try{
+        const user = await User.findById(req.user._id);
+
+        res.json({
+            success: true,
+            user,
+        })
+    }catch(err){
+        next(new ErrorHandler(err.message, null))
+    }
+}
+
+exports.updateProfile = async (req, res, next) => {
+    const {name, email} = req.body;
+
+    let user = await User.findById(req.user._id);
+
+    if(name) user.name=name;
+    if(email) user.email=email;
+
+    await user.save();
+
     res.status(200).json({
         success: true,
-        message: "Demo Verified"
+        message: "User Updated Successfully"
+    })
+}
+
+exports.updateProfilePicture = async (req, res, next) => {
+    const file = req.file;
+
+    if(!file) return next(new ErrorHandler("Please enter the field", 400))
+
+    const user = await User.findById(req.user._id);
+
+    const fileUri = getDataUri(file)
+
+    const mycloud = await cloudinary.uploader.upload(fileUri.content);
+
+    await cloudinary.uploader.destroy(user.avatar.public_id);
+
+    user.avatar.public_id = mycloud.public_id;
+    user.avatar.url = mycloud.url;
+
+    await user.save();
+
+    res.status(200).json({
+        success: true,
+        message: "User Profile Picture Updated Successfully"
     })
 }
