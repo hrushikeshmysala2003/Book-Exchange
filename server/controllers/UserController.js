@@ -153,3 +153,19 @@ exports.updateProfilePicture = async (req, res, next) => {
         message: "User Profile Picture Updated Successfully"
     })
 }
+
+exports.deleteMyProfile = async (req, res, next) => {
+    let user = await User.findById(req.user._id);
+
+    await cloudinary.uploader.destroy(user.avatar.public_id);
+
+    await User.deleteOne(user);
+
+
+    res.status(200).cookie("token", null, {
+        expires: new Date(Date.now())
+    }).json({
+        success: true,
+        message: "User Deleted Successfully"
+    })
+}
