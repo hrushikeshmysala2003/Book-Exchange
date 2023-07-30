@@ -45,6 +45,7 @@ exports.deleteBook = async (req,res,next)=>{
     try {
         const book=await Book.findByIdAndDelete({_id:book_id});
         if(book){
+        await cloudinary.uploader.destroy(book.image.public_id);
         res.status(202).json({
             success: true,
             message: "Book deleted Successfully",
