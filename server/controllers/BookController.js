@@ -52,7 +52,7 @@ exports.deleteBook = async (req,res,next)=>{
         })}else{
             return res.status(404).json({
                 success:false,
-                message: "Book does not found",
+                message: "Book is not found",
             })
         }
     } catch (error) {
