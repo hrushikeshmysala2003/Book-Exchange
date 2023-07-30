@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const Book = require("../models/Book");
 const ErrorHandler = require("../utils/ErrorHandler");
 const getDataUri = require("../utils/DataUri");
 const cloudinary = require("cloudinary").v2;
@@ -32,7 +33,7 @@ exports.registerUser = async (req, res, next) => {
             
         });
 
-        const token = user.getJwtToken();
+        const token = await user.getJwtToken();
 
         const options = {
             httpOnly: true,
@@ -115,57 +116,77 @@ exports.getMyProfile = async (req, res, next) => {
 }
 
 exports.updateProfile = async (req, res, next) => {
-    const {name, email} = req.body;
+    try {
+        const {name, email} = req.body;
 
-    let user = await User.findById(req.user._id);
+        let user = await User.findById(req.user._id);
 
-    if(name) user.name=name;
-    if(email) user.email=email;
+        if(name) user.name=name;
+        if(email) user.email=email;
 
-    await user.save();
+        await user.save();
 
-    res.status(200).json({
-        success: true,
-        message: "User Updated Successfully"
-    })
+        res.status(200).json({
+            success: true,
+            message: "User Updated Successfully"
+        })
+    } catch (err) {
+        next(new ErrorHandler(err.message, null));
+    }
 }
 
 exports.updateProfilePicture = async (req, res, next) => {
-    const file = req.file;
+    try {
+        const file = req.file;
 
-    if(!file) return next(new ErrorHandler("Please enter the field", 400))
+        if(!file) return next(new ErrorHandler("Please enter the field", 400))
 
-    const user = await User.findById(req.user._id);
+        const user = await User.findById(req.user._id);
 
-    const fileUri = getDataUri(file)
+        const fileUri = getDataUri(file)
 
-    const mycloud = await cloudinary.uploader.upload(fileUri.content);
+        const mycloud = await cloudinary.uploader.upload(fileUri.content);
 
-    await cloudinary.uploader.destroy(user.avatar.public_id);
+        await cloudinary.uploader.destroy(user.avatar.public_id);
 
-    user.avatar.public_id = mycloud.public_id;
-    user.avatar.url = mycloud.url;
+        user.avatar.public_id = mycloud.public_id;
+        user.avatar.url = mycloud.url;
 
-    await user.save();
+        await user.save();
 
-    res.status(200).json({
-        success: true,
-        message: "User Profile Picture Updated Successfully"
-    })
+        res.status(200).json({
+            success: true,
+            message: "User Profile Picture Updated Successfully"
+        })
+    } catch (err) {
+        next(new ErrorHandler(err.message, null));
+    }
 }
 
 exports.deleteMyProfile = async (req, res, next) => {
-    let user = await User.findById(req.user._id);
+    try {
+        let user = await User.findById(req.user._id);
 
-    await cloudinary.uploader.destroy(user.avatar.public_id);
+        let books = await Book.find({user: req.user._id});
+        console.log(books);
 
-    await User.deleteOne(user);
+        books.map( async (item) => {
+            await cloudinary.uploader.destroy(item.image.public_id);
+            await Book.deleteOne(item);
+        } )
+
+        await cloudinary.uploader.destroy(user.avatar.public_id);
+
+        await User.deleteOne(user);
 
 
-    res.status(200).cookie("token", null, {
-        expires: new Date(Date.now())
-    }).json({
-        success: true,
-        message: "User Deleted Successfully"
-    })
+        res.status(200).cookie("token", null, {
+            expires: new Date(Date.now())
+        }).json({
+            success: true,
+            message: "User Deleted Successfully"
+        })
+    } catch (error) {
+        next(new ErrorHandler(err.message, null));
+    }
 }
