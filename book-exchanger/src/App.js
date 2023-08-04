@@ -7,6 +7,7 @@ import Login from './screens/AuthPages/Login';
 import ChangePassword from './screens/AuthPages/ChangePassword';
 import ResetPassword from './screens/AuthPages/ResetPassword';
 import ForgetPassword from './screens/AuthPages/ForgetPassword';
+import Addbook from './screens/Addbook';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/changepassword" element={<ChangePassword />} />
           <Route path="/resetpassword" element={<ResetPassword />} />
           <Route path="/forgetpassword" element={<ForgetPassword />} />
+          <Route path="/addbook" element={<Addbook />} />
         </Routes>
       </div>
     </Router>

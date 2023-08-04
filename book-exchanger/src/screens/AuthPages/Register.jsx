@@ -27,7 +27,7 @@ const Register = () => {
             </div>
             <div className="mt-3" >
                 <label htmlFor="file" className="my-3 block text-base mb-2" >Profile picture : </label>
-                <input  type="file" id='file' className=" rounded-md border border-gray-200 order w-full text-base px-2 py-1 focus:outline-none focus:ring focus:border-blue-600" />
+                <input  type="file" id='file' className=" rounded-md border border-gray-200 w-full text-base px-2 py-1 focus:outline-none focus:ring focus:border-blue-600" />
             </div>
 
             <div>

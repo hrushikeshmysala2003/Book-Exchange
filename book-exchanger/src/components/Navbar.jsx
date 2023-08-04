@@ -12,7 +12,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-blue-500 p-4 relative w-[100vw]">
+    <nav className="p-5 bg-blue-500 w-full border-b fixed top-0 left-0 border-b-gray-200 shadow-md z-10">
       <div className="flex items-center gap-4">
         <Link to={'/'} className='flex items-center gap-1 cursor-pointer'>
           <ImBooks fontSize={"1.75rem"} color='white' />
