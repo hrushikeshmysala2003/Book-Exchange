@@ -32,6 +32,11 @@ const bookSchema = new Schema({
         required: true,
         maxLength:[100, 'A book description must have less or equal than 100 characters'],
     },
+    price:{
+        type:Number,
+        required:true
+
+    },
     status: {
         type: String,
         enum: ["new", "booked", "sold"],

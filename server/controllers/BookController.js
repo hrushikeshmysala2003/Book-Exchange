@@ -6,10 +6,10 @@ const cloudinary = require("cloudinary").v2;
 
 exports.addBook=async(req,res,next)=>{
     try {
-        const {title,author,category,description,id} = req.body;
+        const {title,author,category,description,price,id} = req.body;
         const file = req.file;
         
-        if(!title || !author || !category || !description || !id || !file){
+        if(!title || !author || !category || !description || !id || !file || !price){
             return next(new ErrorHandler("Please enter all the book details", 400));
         }
 
@@ -26,6 +26,7 @@ exports.addBook=async(req,res,next)=>{
             },
             category,
             description,
+            price,
             status:"new",
             user:id
         })
@@ -33,7 +34,7 @@ exports.addBook=async(req,res,next)=>{
         res.status(201).json({
             success: true,
             message: "Book added Successfully",
-            book, 
+            data:book, 
         })
     } catch (error) {
         return next(new ErrorHandler(error.message, null));
