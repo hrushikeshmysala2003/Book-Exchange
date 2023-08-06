@@ -4,15 +4,19 @@ const ErrorHandler = require("../utils/ErrorHandler");
 
 
 const isAuthenticated = async (req, res, next) => {
-    const {token} = req.cookies;
+    try {
+        const {token} = req.cookies;
 
-    if(!token) return next(new ErrorHandler("Log in to access this resource"));
+        if(!token) return next(new ErrorHandler("User not logged in", 401));
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    req.user = await User.findById(decoded._id);
+        req.user = await User.findById(decoded._id);
 
-    next();
+        next();
+    } catch (error) {
+        return next(new ErrorHandler(error.message, null));
+    }
 }
 
 module.exports = isAuthenticated;

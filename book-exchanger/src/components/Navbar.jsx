@@ -3,14 +3,22 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 import { AiOutlineClose } from 'react-icons/ai';
 import { ImBooks } from 'react-icons/im';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutUser } from '../redux/actions/user';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const dispatch = useDispatch();
+  const {isAuthenticated} = useSelector(state => state.user)
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const logoutSubmitHandler = (e) => {
+    e.preventDefault();
+
+    dispatch(logoutUser());
+  }
   return (
     <nav className="p-5 bg-blue-500 w-full border-b fixed top-0 left-0 border-b-gray-200 shadow-md z-10">
       <div className="flex items-center gap-4">
@@ -43,11 +51,29 @@ const Navbar = () => {
           </Link>
 
         </div>
+        {
+          isAuthenticated ? (
+            <>
+            <div className='hidden md:flex space-x-2 absolute right-4 '>
+              <Link to={'/profile'} className='bg-white hover:text-blue-700 text-blue-400 font-bold py-2 px-4 rounded'>Profile</Link>
+              <button onClick={logoutSubmitHandler} className='bg-white hover:text-blue-700 text-blue-400 font-bold py-2 px-4 rounded'>Logout</button>
+            </div>
+            </>
+          ): (
+            <>
+            <div className='hidden md:flex space-x-2 absolute right-4 '>
+              <Link to={'/login'} className='bg-white hover:text-blue-700 text-blue-400 font-bold py-2 px-4 rounded'>Login</Link>
+              <Link to={'/register'} className='bg-white hover:text-blue-700 text-blue-400 font-bold py-2 px-4 rounded'>Register</Link>
+            </div>
+            </>
+          )
+        }
 
-        <div className='hidden md:flex space-x-2 absolute right-4 '>
+        {/* <div className='hidden md:flex space-x-2 absolute right-4 '>
           <Link to={'/login'} className='bg-white hover:text-blue-700 text-blue-400 font-bold py-2 px-4 rounded'>Login</Link>
+          <button onClick={logoutSubmitHandler} className='bg-white hover:text-blue-700 text-blue-400 font-bold py-2 px-4 rounded'>Logout</button>
           <Link to={'/register'} className='bg-white hover:text-blue-700 text-blue-400 font-bold py-2 px-4 rounded'>Register</Link>
-        </div>
+        </div> */}
       </div>
 
       {/* Responsive menu for smaller screens */}
