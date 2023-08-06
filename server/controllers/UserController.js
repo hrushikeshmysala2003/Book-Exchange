@@ -62,7 +62,7 @@ exports.loginUser = async (req, res, next) => {
     try {
         const {email, userPassword} = req.body;
 
-        if(!email || !userPassword) return next(new ErrorHandler("Please enter all fields", 400));
+        if(!email || !userPassword) return next(new ErrorHandler("Please yaar enter all fields", 400));
 
         const user = await User.findOne({email: email}).select("+password");
 
@@ -83,7 +83,8 @@ exports.loginUser = async (req, res, next) => {
 
         res.status(200).cookie("token", token, options).json({
             success: true,
-            message: "User Logged In",
+            user,
+            message: `Welcome back ${user.name}`
         })
     } catch (error) {
         return next(new ErrorHandler(error.message, null))

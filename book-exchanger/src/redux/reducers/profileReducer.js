@@ -1,6 +1,6 @@
 import {createReducer} from "@reduxjs/toolkit"
 
-export const profileReducer = createReducer({
+export const profileReducer = createReducer({}, {
     loadUserRequest: (state) => {
         state.loading = true;
     },
