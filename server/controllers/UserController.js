@@ -76,9 +76,10 @@ exports.loginUser = async (req, res, next) => {
         const token = await user.getJwtToken();
 
         const options = {
-            httpOnly: true,
             expires: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000),
-            sameSite: "none"
+            httpOnly: true,
+            secure: true,
+            sameSite: "none",
         }
 
         res.status(200).cookie("token", token, options).json({

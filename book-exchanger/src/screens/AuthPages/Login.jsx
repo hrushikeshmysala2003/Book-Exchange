@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import {Link} from "react-router-dom"
-import { loginUser } from '../../redux/actions/user';
+import { loadUser, loginUser } from '../../redux/actions/user';
 import toast from "react-hot-toast";
 
 const Login = () => {
@@ -15,6 +15,7 @@ const Login = () => {
         dispatch(loginUser(email, password))
         setEmail("");
         setPassword("");
+        dispatch(loadUser());
     }
    
   return (

@@ -11,32 +11,44 @@ import Addbook from './screens/Addbook';
 import toast, {Toaster} from "react-hot-toast"
 import { useDispatch, useSelector } from 'react-redux';
 import Profile from './screens/Profile';
+import {loadUser} from "./redux/actions/user"
+import {ProtectedRoute} from "protected-route-react"
 function App() {
   const dispatch = useDispatch();
   const {loading, isAuthenticated, user, error, message} = useSelector(state => state.user);
-  console.log(user, error, message, loading, isAuthenticated);
-  
-  // useEffect({
-  //     if(error){
-  //         toast.error(error);
-  //         dispatch({type: "clearError"});
-  //     },
-  //     if(message){ 
-  //         toast.error(message);
-  //         dispatch({type: "clearMessage"});
-  //     }
-  // }, [dispatch, message, error])
+
+  useEffect(() => {
+    dispatch(loadUser());
+  }, [dispatch])
+
+  useEffect(() => {
+    if(error){
+      toast.error(error);
+      dispatch({type: "clearError"});
+  }
+  if(message){ 
+    toast.success(error);
+    dispatch({type: "clearMessage"});
+  }
+  }, [dispatch, message, error])
   return (
     <Router>
       <div>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={
+          <ProtectedRoute >
+            <Register isAuthenticated={!isAuthenticated} redirect="/profile" />
+          </ProtectedRoute>
+          } />
+          <Route path="/login" element={
+          <ProtectedRoute isAuthenticated={!isAuthenticated} redirect="/profile" >
+            <Login />
+          </ProtectedRoute>} />
           <Route path="/changepassword" element={<ChangePassword />} />
           <Route path="/resetpassword" element={<ResetPassword />} />
           <Route path="/forgetpassword" element={<ForgetPassword />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile" element={<Profile isAuthenticated />} />
           <Route path="/addbook" element={<Addbook />} />
         </Routes>
       <Toaster />
