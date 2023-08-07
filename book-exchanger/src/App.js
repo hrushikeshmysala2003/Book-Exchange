@@ -27,7 +27,7 @@ function App() {
       dispatch({type: "clearError"});
   }
   if(message){ 
-    toast.success(error);
+    toast.success(message);
     dispatch({type: "clearMessage"});
   }
   }, [dispatch, message, error])
@@ -37,8 +37,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/register" element={
-          <ProtectedRoute >
-            <Register isAuthenticated={!isAuthenticated} redirect="/profile" />
+          <ProtectedRoute isAuthenticated={!isAuthenticated} redirect="/profile"  >
+            <Register />
           </ProtectedRoute>
           } />
           <Route path="/login" element={

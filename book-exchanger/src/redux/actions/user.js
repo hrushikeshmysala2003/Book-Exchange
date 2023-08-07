@@ -37,7 +37,7 @@ export const logoutUser = () => async (dispatch) => {
 
 export const loadUser = () => async (dispatch) => {
     try {
-        dispatch({type: "loadUser"});
+        dispatch({type: "loadUserRequest"});
 
         const {data} = await axios.get(`${server}/me`, {
             withCredentials: true,
@@ -45,6 +45,23 @@ export const loadUser = () => async (dispatch) => {
         console.log(data);
         dispatch({type: "loadUserSuccess", payload: data})
     } catch (error) {
-        dispatch({type: "loadUserFail", payload: error})
+        dispatch({type: "loadUserFail", payload: null})
+    }
+}
+
+export const registerUser = (formdata) => async (dispatch) => {
+    try{
+        dispatch({type: "registerRequest"});
+
+        const {data} = await axios.post(`${server}/register`, formdata, {
+            "withCredentials": true,
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        });
+
+        dispatch({type: "registerSuccess", payload: data});
+    }catch(error){
+        dispatch({type: "registerFail", payload: error.response.data.message})
     }
 }

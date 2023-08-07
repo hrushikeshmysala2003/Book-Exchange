@@ -38,7 +38,8 @@ exports.registerUser = async (req, res, next) => {
         const options = {
             httpOnly: true,
             expires: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000),
-            sameSite: "none"
+            sameSite: "none",
+            secure: true
         }
         // 201 code is for created
         // A cookie is a piece of data that is sent to the client-side with a request and is stored on the client-side itself by 
