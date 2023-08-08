@@ -8,28 +8,28 @@ import ChangePassword from './screens/AuthPages/ChangePassword';
 import ResetPassword from './screens/AuthPages/ResetPassword';
 import ForgetPassword from './screens/AuthPages/ForgetPassword';
 import Addbook from './screens/Addbook';
-import toast, {Toaster} from "react-hot-toast"
+import toast, { Toaster } from "react-hot-toast"
 import { useDispatch, useSelector } from 'react-redux';
 import Profile from './screens/Profile';
-import {loadUser} from "./redux/actions/user"
-import {ProtectedRoute} from "protected-route-react"
+import { loadUser } from "./redux/actions/user"
+import { ProtectedRoute } from "protected-route-react"
 function App() {
   const dispatch = useDispatch();
-  const {loading, isAuthenticated, user, error, message} = useSelector(state => state.user);
+  const { loading, isAuthenticated, user, error, message } = useSelector(state => state.user);
 
   useEffect(() => {
     dispatch(loadUser());
   }, [dispatch])
 
   useEffect(() => {
-    if(error){
+    if (error) {
       toast.error(error);
-      dispatch({type: "clearError"});
-  }
-  if(message){ 
-    toast.success(error);
-    dispatch({type: "clearMessage"});
-  }
+      dispatch({ type: "clearError" });
+    }
+    if (message) {
+      toast.success(error);
+      dispatch({ type: "clearMessage" });
+    }
   }, [dispatch, message, error])
   return (
     <Router>
@@ -37,21 +37,21 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/register" element={
-          <ProtectedRoute >
-            <Register isAuthenticated={!isAuthenticated} redirect="/profile" />
-          </ProtectedRoute>
+            <ProtectedRoute >
+              <Register isAuthenticated={!isAuthenticated} redirect="/profile" />
+            </ProtectedRoute>
           } />
           <Route path="/login" element={
-          <ProtectedRoute isAuthenticated={!isAuthenticated} redirect="/profile" >
-            <Login />
-          </ProtectedRoute>} />
+            <ProtectedRoute isAuthenticated={!isAuthenticated} redirect="/profile" >
+              <Login />
+            </ProtectedRoute>} />
           <Route path="/changepassword" element={<ChangePassword />} />
           <Route path="/resetpassword" element={<ResetPassword />} />
           <Route path="/forgetpassword" element={<ForgetPassword />} />
           <Route path="/profile" element={<Profile isAuthenticated />} />
           <Route path="/addbook" element={<Addbook />} />
         </Routes>
-      <Toaster />
+        <Toaster />
       </div>
     </Router>
   )

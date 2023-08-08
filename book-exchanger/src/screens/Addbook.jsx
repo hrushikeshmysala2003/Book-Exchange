@@ -59,12 +59,12 @@ export default function AddBook() {
                         <form onSubmit={handleSubmit} className='border w-[80%] mx-auto p-5 shadow-md rounded-md'>
                             <div className='mb-3'>
                                 <label htmlFor="title" className='block mb-2'>Title</label>
-                                <input type="text" name='title' id='title' placeholder='Title' className='border w-full p-2 rounded-md focus:outline-none focus:ring focus:border-blue-400' required
+                                <input type="text" value={details.title} name='title' id='title' placeholder='Title' className='border w-full p-2 rounded-md focus:outline-none focus:ring focus:border-blue-400' required
                                     onChange={handleChange} />
                             </div>
                             <div className='mb-3'>
                                 <label htmlFor="author" className='block mb-2'>Author</label>
-                                <input type="text" id='author' name='author' placeholder='Author' className='border w-full p-2 rounded-md focus:outline-none focus:ring focus:border-blue-400' required
+                                <input type="text" value={details.author} id='author' name='author' placeholder='Author' className='border w-full p-2 rounded-md focus:outline-none focus:ring focus:border-blue-400' required
                                     onChange={handleChange} />
                             </div>
                             <div className='mb-3'>
