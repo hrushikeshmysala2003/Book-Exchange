@@ -2,6 +2,20 @@ import {createReducer} from "@reduxjs/toolkit"
 
 
 export const userReducer = createReducer({}, {
+    registerRequest: (state) => {
+        state.loading = true;
+    },
+    registerSuccess: (state, action) => {
+        state.loading = false;
+        state.isAuthenticated = true;
+        state.user = action.payload.user;
+        state.message = action.payload.message;
+    },
+    registerFail: (state, action) => {
+        state.loading = false;
+        state.isAuthenticated = false;
+        state.error = action.payload;
+    },
     loginRequest: (state) => {
         state.loading = true;
     },
@@ -45,6 +59,6 @@ export const userReducer = createReducer({}, {
     },
     loadUserFail: (state, action) => {
         state.loading = false;
-        state.error = action.payload;
+        // state.error = action.payload;
     },
 })

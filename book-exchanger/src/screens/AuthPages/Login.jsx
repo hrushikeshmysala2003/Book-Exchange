@@ -15,7 +15,6 @@ const Login = () => {
         dispatch(loginUser(email, password))
         setEmail("");
         setPassword("");
-        dispatch(loadUser());
     }
    
   return (
