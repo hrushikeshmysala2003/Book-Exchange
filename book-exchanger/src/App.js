@@ -10,10 +10,9 @@ import ForgetPassword from './screens/AuthPages/ForgetPassword';
 import Addbook from './screens/Addbook';
 import toast, { Toaster } from "react-hot-toast"
 import { useDispatch, useSelector } from 'react-redux';
-import Profile from './screens/Profile';
-import { loadUser } from "./redux/actions/user"
-import { ProtectedRoute } from "protected-route-react"
-
+import {loadUser} from "./redux/actions/user"
+import {ProtectedRoute} from "protected-route-react"
+import Profile from './screens/Profile/Profile';
 function App() {
   const dispatch = useDispatch();
   const { loading, isAuthenticated, user, error, message } = useSelector(state => state.user);
@@ -49,7 +48,11 @@ function App() {
           <Route path="/changepassword" element={<ChangePassword />} />
           <Route path="/resetpassword" element={<ResetPassword />} />
           <Route path="/forgetpassword" element={<ForgetPassword />} />
-          <Route path="/profile" element={<Profile isAuthenticated />} />
+          <Route path="/profile" element={
+            <ProtectedRoute isAuthenticated={isAuthenticated} redirect="/login" >
+              <Profile user={user} />
+            </ProtectedRoute>
+          } />
           <Route path="/addbook" element={<Addbook />} />
         </Routes>
         <Toaster />
