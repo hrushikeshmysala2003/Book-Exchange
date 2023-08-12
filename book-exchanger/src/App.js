@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {loadUser} from "./redux/actions/user"
 import {ProtectedRoute} from "protected-route-react"
 import Profile from './screens/Profile/Profile';
+
 function App() {
   const dispatch = useDispatch();
   const { loading, isAuthenticated, user, error, message } = useSelector(state => state.user);

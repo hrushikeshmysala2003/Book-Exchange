@@ -8,7 +8,7 @@
     .profile-container{
         flex-direction: column;
     }
-    img{
+    .avatar{
         width: 100px;
         height: 100px;
     }
@@ -16,7 +16,7 @@
         height: 300px;
     }
 }
-img{
+.avatar{
     border-radius: 50%;
 }
 .image-container{

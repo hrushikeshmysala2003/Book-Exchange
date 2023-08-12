@@ -15,7 +15,7 @@ const Profile = ({user}) => {
                     <div className='bg-white  p-2 ' >
                       <div className='flex flex-row justify-evenly items-center h-full  profile-container' >
                           <div className='basis-4/12 w-10 h-10 flex justify-center items-center  image-container p-3' >
-                            <img  className='' src={user.avatar.url} alt="Image" />
+                            <img  className='avatar' src={user.avatar.url} alt="Image" />
                           </div>
                           <div className=' flex flex-col justify-center px-5' >
                             <div><p className='font-semibold inline-block' >Name</p> : {user.name}</div>
