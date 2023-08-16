@@ -36,8 +36,8 @@ exports.registerUser = async (req, res, next) => {
         const token = await user.getJwtToken();
 
         const options = {
-            httpOnly: true,
             expires: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000),
+            httpOnly: true,
             sameSite: "none",
             secure: true
         }
@@ -86,7 +86,7 @@ exports.loginUser = async (req, res, next) => {
         res.status(200).cookie("token", token, options).json({
             success: true,
             user,
-            message: `Welcome back ${user.name}`
+            message: `Welcome back ${user.name.toUpperCase( )}`
         })
     } catch (error) {
         return next(new ErrorHandler(error.message, null))
@@ -97,8 +97,9 @@ exports.loginUser = async (req, res, next) => {
 exports.logoutUser = (req, res) => {
     res.status(200).cookie("token", null, {
         expires: new Date(Date.now()),
-        sameSite: "none", 
         httpOnly: true,
+        secure: true,
+        sameSite: "none",
     }).json({
         success: true,
         message: "Logged out Successfully"

@@ -10,17 +10,13 @@ import ForgetPassword from './screens/AuthPages/ForgetPassword';
 import Addbook from './screens/Addbook';
 import toast, { Toaster } from "react-hot-toast"
 import { useDispatch, useSelector } from 'react-redux';
-import {loadUser} from "./redux/actions/user"
-import {ProtectedRoute} from "protected-route-react"
+import { loadUser } from "./redux/actions/user"
+import { ProtectedRoute } from "protected-route-react"
 import Profile from './screens/Profile/Profile';
 
 function App() {
   const dispatch = useDispatch();
   const { loading, isAuthenticated, user, error, message } = useSelector(state => state.user);
-
-  useEffect(() => {
-    dispatch(loadUser());
-  }, [dispatch])
 
   useEffect(() => {
     if (error) {
@@ -32,15 +28,21 @@ function App() {
       dispatch({ type: "clearMessage" });
     }
   }, [dispatch, message, error])
+
+  useEffect(() => {
+    dispatch(loadUser());
+  }, [dispatch])
+
+  // console.log("isauth: ", isAuthenticated);
   return (
     <Router>
       <div>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/register" element={
-          <ProtectedRoute isAuthenticated={!isAuthenticated} redirect="/profile"  >
-            <Register />
-          </ProtectedRoute>
+            <ProtectedRoute isAuthenticated={!isAuthenticated} redirect="/profile"  >
+              <Register />
+            </ProtectedRoute>
           } />
           <Route path="/login" element={
             <ProtectedRoute isAuthenticated={!isAuthenticated} redirect="/profile" >
@@ -54,7 +56,10 @@ function App() {
               <Profile user={user} />
             </ProtectedRoute>
           } />
-          <Route path="/addbook" element={<Addbook />} />
+          <Route path="/addbook" element={
+            isAuthenticated ?
+              < Addbook user={user} /> : <Login />
+          } />
         </Routes>
         <Toaster />
       </div>
