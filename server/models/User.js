@@ -25,12 +25,14 @@ const userSchema = new mongoose.Schema({
     avatar: {
         public_id: {
             type: String,
-            required: true,
         },
         url: {
             type: String,
-            required: true,
         }
+    },
+    googleId: {
+        type: String,
+        unique: true,
     },
     createdAt: {
         type: Date,
