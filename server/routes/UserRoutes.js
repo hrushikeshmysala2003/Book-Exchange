@@ -10,11 +10,14 @@ router.route("/googlelogin").get( passport.authenticate("google", {
     scope: ["profile", "email"]
 }) )
 router.route("/current_user").get((req, res) => {
-    res.send(req.user)
+    res.status(200).json({
+        success: true,
+        user: req.user
+    })
 });
 router.route("/login").get(passport.authenticate("google", 
     {
-        successRedirect: '/current_user',
+        successRedirect: '/api/v1/current_user',
     	failureRedirect: '/login'
     }
 ))

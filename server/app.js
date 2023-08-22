@@ -7,16 +7,18 @@ const passport=require("passport");
 const cookieSession = require("cookie-session")
 require('dotenv').config();
 require('./utils/Provider');
+
+app.use(cookieParser());
+app.use(express.json());
 app.use(
     cookieSession({
         maxAge: 15 * 24 * 60 * 60 * 100,
-        keys: process.env.COOKIE_KEY
+        keys: [process.env.COOKIE_KEY]
     })
 )
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(cookieParser());
-app.use(express.json());
+
 app.use(cors({
     credentials: true,
     origin: "http://localhost:3000"

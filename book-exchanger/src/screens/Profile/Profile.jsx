@@ -23,12 +23,12 @@ const Profile = ({user}) => {
                             <div><p className='font-semibold inline' >Created At</p> : {user.createdAt.split("T")[0]}</div>
                             <div className='flex py-2' >
                               <div>
-                              <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
                                 Update Profile 
                               </button>
                               </div>
                               <div>
-                              <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
                                 Change Password
                               </button>
                               </div>
@@ -37,7 +37,7 @@ const Profile = ({user}) => {
                             <div className='flex justify-center'>
                             <Link>
 
-                              <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+                              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
                                 Go to home
                               </button>
                             </Link>
