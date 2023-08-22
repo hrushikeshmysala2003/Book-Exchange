@@ -5,6 +5,7 @@ const ErrorHandler = require("../utils/ErrorHandler");
 
 const isAuthenticated = async (req, res, next) => {
     try {
+        if(req.user) next();
         const {token} = req.cookies;
 
         if(!token) return next(new ErrorHandler("User not logged in", 401));
