@@ -109,12 +109,12 @@ exports.getMyProfile = async (req, res, next) => {
     try{
         const user = await User.findById(req.user._id);
 
-        res.json({
+        res.status(200).json({
             success: true,
             user,
         })
     }catch(err){
-        next(new ErrorHandler(err.message, null))
+        return next(new ErrorHandler(err.message, null))
     }
 }
 
