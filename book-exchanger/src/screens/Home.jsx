@@ -1,6 +1,7 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import Books from '../components/Books'
 
 function Home() {
   return (
@@ -17,6 +18,9 @@ function Home() {
           <div className='overflow-x-hidden'>
             <img src="https://res.cloudinary.com/dwna7axtx/image/upload/v1691061297/aosbl954en9mvr4qajqr.jpg"
               alt="bg" className='h-[480px] w-full object-cover opacity-90' />
+          </div>
+          <div>
+            <Books />
           </div>
         </div>
         <div>
