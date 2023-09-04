@@ -10,43 +10,6 @@ const Profile = ({ user }) => {
         <Navbar />
       </div>
       <div>
-<<<<<<< HEAD
-      {
-        user && <div className=' rounded-2xl flex overlow-auto justify-center bg-sky-500/100' >
-                  <div className=' w-8/12 sm:w-full h-screen bg-sky-500/100 flex flex-col justify-center p-2 father' > 
-                    <div className='bg-white  p-2 ' >
-                      <div className='flex flex-row justify-evenly items-center h-full  profile-container' >
-                          <div className='basis-4/12 w-10 h-10 flex justify-center items-center  image-container p-3' >
-                            <img  className='avatar' src={user.avatar.url} alt="Image" />
-                          </div>
-                          <div className=' flex flex-col justify-center px-5' >
-                            <div><p className='font-semibold inline-block' >Name</p> : {user.name}</div>
-                            <div><p className='font-semibold inline' >Email</p> : {user.email}</div>
-                            <div><p className='font-semibold inline' >Created At</p> : {user.createdAt.split("T")[0]}</div>
-                            <div className='flex py-2' >
-                              <div>
-                              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-                                Update Profile 
-                              </button>
-                              </div>
-                              <div>
-                              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-                                Change Password
-                              </button>
-                              </div>
-                            </div>
-
-                            <div className='flex justify-center'>
-                            <Link>
-
-                              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-                                Go to home
-                              </button>
-                            </Link>
-                            </div>
-          
-                          </div>
-=======
         {
           user && <div className=' rounded-2xl flex overlow-auto justify-center bg-sky-500/100' >
             <div className=' w-8/12 sm:w-full h-screen bg-sky-500/100 flex flex-col justify-center p-2 father' >
@@ -69,7 +32,6 @@ const Profile = ({ user }) => {
                         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
                           Change Password
                         </button>
->>>>>>> b915e12588a36641f4a6572d726534515bcaff98
                       </div>
                     </div>
 
