@@ -1,0 +1,9 @@
+@media screen and (max-width:750px) {
+    .about{
+        flex-direction: column;
+        width: 100%;
+    }
+    .about-para,.about-img{
+        width: 80%;
+    }
+}

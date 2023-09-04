@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 function Card({ book }) {
-    console.log(book);
+    // console.log(book);
     const [desc, setdesc] = useState(book.description.substring(0, Math.min(100, book.description.length)))
 
     function handleDesc() {
@@ -15,7 +15,7 @@ function Card({ book }) {
             <div>
                 <img src={book.img.url} alt="img" className='rounded h-[150px] w-[300px] object-cover' />
             </div>
-            <div className='p-3 text-center'>
+            <div className='p-3 text-center flex-grow'>
                 <h3 className='font-bold text-xl mb-2'>{book.name}</h3>
                 {
                     desc.length >= 100 ?

@@ -2,6 +2,7 @@ import React from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import Books from '../components/Books'
+import About from '../components/About'
 
 function Home() {
   return (
@@ -22,8 +23,11 @@ function Home() {
           <div>
             <Books />
           </div>
+          <div>
+            <About />
+          </div>
         </div>
-        <div>
+        <div className='mt-[4rem]'>
           <Footer />
         </div>
       </div>

@@ -5,14 +5,14 @@ import { server } from '../redux/store'
 
 function Books() {
 
-    const book = {
-        name: "Importance of Book Exchange",
-        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, asperiores blanditiis dignissimos enim minima delectus, commodi repellendus perspiciatis libero, modi voluptatibus sapiente praesentium beatae repellat! Voluptates rerum animi doloremque laudantium.",
-        img:{
-            url:'https://bookxchange.in/assets/img/blog/blog1.jpg'
-        },
-        price: 100,
-    }
+    // const book = {
+    //     name: "Importance of Book Exchange",
+    //     description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, asperiores blanditiis dignissimos enim minima delectus, commodi repellendus perspiciatis libero, modi voluptatibus sapiente praesentium beatae repellat! Voluptates rerum animi doloremque laudantium.",
+    //     img:{
+    //         url:'https://bookxchange.in/assets/img/blog/blog1.jpg'
+    //     },
+    //     price: 100,
+    // }
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -33,7 +33,7 @@ function Books() {
                 </div>
 
                 <div className='bg-[#F5F5F5] w-full flex justify-center p-[3rem]'>
-                    <div className='flex flex-wrap justify-center w-[80%] gap-4'>
+                    <div className='flex flex-wrap justify-center w-[90%] gap-[2rem]'>
                         {/* <Card book={book} />
                         <Card book={book} />
                         <Card book={book} /> */}

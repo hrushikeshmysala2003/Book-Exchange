@@ -7,7 +7,7 @@ const bookSchema = new Schema({
         type: String,
         required: true,
         trim: true,
-        maxLength: [40, 'A book title must have less or equal than 40 characters'],
+        // maxLength: [40, 'A book title must have less or equal than 40 characters'],
     },
     author: {
         type: String,
@@ -30,7 +30,7 @@ const bookSchema = new Schema({
     description: {
         type: String,
         required: true,
-        maxLength:[100, 'A book description must have less or equal than 100 characters'],
+        // maxLength:[100, 'A book description must have less or equal than 100 characters'],
     },
     price:{
         type:Number,
