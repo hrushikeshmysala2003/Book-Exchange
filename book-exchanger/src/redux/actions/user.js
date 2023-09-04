@@ -1,7 +1,6 @@
 import axios from "axios"
 import {server} from "../store"
 
-
 export const loginUser = (email, userPassword) => async (dispatch) => {
     try{
         dispatch({type: "loginRequest"});
@@ -14,7 +13,7 @@ export const loginUser = (email, userPassword) => async (dispatch) => {
                 "Content-Type": "application/json"
             }
         });
-
+        console.log(data);
         dispatch({type: "loginSuccess", payload: data});
     }catch(error){
         dispatch({type: "loginFail", payload: error.response.data.message})
@@ -53,11 +52,12 @@ export const registerUser = (formdata) => async (dispatch) => {
     try{
         dispatch({type: "registerRequest"});
 
-        const {data} = await axios.post(`${server}/register`, formdata, {
+        const {data} = await axios.post(`${server}/register`,formdata, {
             "withCredentials": true,
             headers: {
                 "Content-Type": "multipart/form-data"
-            }
+            },
+            file:formdata.file
         });
 
         dispatch({type: "registerSuccess", payload: data});

@@ -9,7 +9,7 @@ import { logoutUser } from '../redux/actions/user';
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const dispatch = useDispatch();
-  const {isAuthenticated} = useSelector(state => state.user)
+  const { isAuthenticated } = useSelector(state => state.user)
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -54,17 +54,18 @@ const Navbar = () => {
         {
           isAuthenticated ? (
             <>
-            <div className='hidden md:flex space-x-2 absolute right-4 '>
-              <Link to={'/profile'} className='bg-white hover:text-blue-700 text-blue-400 font-bold py-2 px-4 rounded'>Profile</Link>
-              <button onClick={logoutSubmitHandler} className='bg-white hover:text-blue-700 text-blue-400 font-bold py-2 px-4 rounded'>Logout</button>
-            </div>
+              <div className='hidden md:flex space-x-2 absolute right-4 '>
+                <Link to={'/profile'} className='bg-white hover:text-blue-700 text-blue-400 font-bold py-2 px-4 rounded'>Profile</Link>
+                <button onClick={logoutSubmitHandler} className='bg-white hover:text-blue-700 text-blue-400 font-bold py-2 px-4 rounded'>Logout</button>
+                <Link to={'/addbook'} className='bg-white hover:text-blue-700 text-blue-400 font-bold py-2 px-4 rounded h-full'>+ Sell Book</Link>
+              </div>
             </>
-          ): (
+          ) : (
             <>
-            <div className='hidden md:flex space-x-2 absolute right-4 '>
-              <Link to={'/login'} className='bg-white hover:text-blue-700 text-blue-400 font-bold py-2 px-4 rounded'>Login</Link>
-              <Link to={'/register'} className='bg-white hover:text-blue-700 text-blue-400 font-bold py-2 px-4 rounded'>Register</Link>
-            </div>
+              <div className='hidden md:flex space-x-2 absolute right-4 '>
+                <Link to={'/login'} className='bg-white hover:text-blue-700 text-blue-400 font-bold py-2 px-4 rounded'>Login</Link>
+                <Link to={'/register'} className='bg-white hover:text-blue-700 text-blue-400 font-bold py-2 px-4 rounded'>Register</Link>
+              </div>
             </>
           )
         }
@@ -74,6 +75,7 @@ const Navbar = () => {
           <button onClick={logoutSubmitHandler} className='bg-white hover:text-blue-700 text-blue-400 font-bold py-2 px-4 rounded'>Logout</button>
           <Link to={'/register'} className='bg-white hover:text-blue-700 text-blue-400 font-bold py-2 px-4 rounded'>Register</Link>
         </div> */}
+        
       </div>
 
       {/* Responsive menu for smaller screens */}
@@ -85,9 +87,20 @@ const Navbar = () => {
           >
             Home
           </Link>
-          <Link to={'/login'} className='bg-white text-center hover:text-blue-700 text-blue-400 font-bold py-2 px-4 rounded w-[100px]'>Login</Link>
-          <Link to={'/register'} className='bg-white text-center hover:text-blue-700 text-blue-400 font-bold py-2 px-4 rounded w-[100px]'>Register</Link>
-
+          {
+            isAuthenticated ? (
+              <>
+                  <Link to={'/profile'} className='bg-white text-center hover:text-blue-700 text-blue-400 font-bold py-2 px-4 rounded w-[100px]'>Profile</Link>
+                  <button onClick={logoutSubmitHandler} className='bg-white text-center hover:text-blue-700 text-blue-400 font-bold py-2 px-4 rounded w-[100px]'>Logout</button>
+                  <Link to={'/profile'} className='bg-white text-center hover:text-blue-700 text-blue-400 font-bold py-2 px-4 rounded w-[100px]'>Sell Book</Link>
+              </>
+            ) : (
+              <>
+                <Link to={'/login'} className='bg-white text-center hover:text-blue-700 text-blue-400 font-bold py-2 px-4 rounded w-[100px]'>Login</Link>
+                <Link to={'/register'} className='bg-white text-center hover:text-blue-700 text-blue-400 font-bold py-2 px-4 rounded w-[100px]'>Register</Link>
+              </>
+            )
+          }
         </div>
       )}
     </nav>
