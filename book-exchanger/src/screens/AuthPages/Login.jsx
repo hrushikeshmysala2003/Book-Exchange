@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import {Link} from "react-router-dom"
-import { loadUser, loginUser } from '../../redux/actions/user';
+import { loadUser, loginUser } from '../../redux/actions/user'
+import { FcGoogle } from "react-icons/fc";
 import toast from "react-hot-toast";
 
 const Login = () => {
@@ -47,8 +48,13 @@ const Login = () => {
                     </div>
                     <Link to={"/forgetpassword"} className=" text-sm italic text-indigo-800 " >Forgot Password?</Link>
             </div>
-            
+            <h2  className='text-center m-1'  >OR</h2>
+            <div className='flex justify-center p-1 rounded-xl bg-red-600'>
+                <button className='flex justify-between'> <FcGoogle className='text-2xl'  /> <p className='font-bold' >Continue with Google </p> </button>
+            </div>
         </form>
+
+        
     </div>
   )
 }

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from "react-router-dom"
-
+import { FcGoogle } from "react-icons/fc";
 import "./fileUploadCss.css"
 import { useDispatch } from 'react-redux'
 import { registerUser } from '../../redux/actions/user'
@@ -71,6 +71,10 @@ const Register = () => {
                         <Link to={"/login"} className=" text-indigo-800 " >Login</Link>
                     </div>
                     
+            </div>
+            <h2  className='text-center m-1'  >OR</h2>
+            <div className='flex justify-center p-1 rounded-xl bg-red-600'>
+                <button className='flex justify-between'> <FcGoogle className='text-2xl'  /> <p className='font-bold' >Continue with Google </p> </button>
             </div>
             
         </form>
