@@ -24,10 +24,6 @@ router.route("/login").get(passport.authenticate("google",
     	failureRedirect: '/login'
     }
 ))
-// router.route("/login").get((req, res) => {
-//     res.send("Logged in")
-// })
-
 router.route("/register").post( singleUpload ,registerUser);
 router.route("/login").post(loginUser);
 router.route("/logout").get(logoutUser);
