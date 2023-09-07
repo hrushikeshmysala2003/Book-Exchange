@@ -20,8 +20,8 @@ router.route("/current_user").get((req, res) => {
 });
 router.route("/login").get(passport.authenticate("google", 
     {
-        successRedirect: '/api/v1/current_user',
-    	failureRedirect: '/login'
+        successRedirect: 'http://localhost:3000/',
+    	failureRedirect: 'http://localhost:3000/login'
     }
 ))
 router.route("/register").post( singleUpload ,registerUser);

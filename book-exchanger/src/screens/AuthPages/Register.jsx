@@ -4,7 +4,7 @@ import { FcGoogle } from "react-icons/fc";
 import "./fileUploadCss.css"
 import { useDispatch } from 'react-redux'
 import { registerUser } from '../../redux/actions/user'
-
+import { server } from '../../redux/store';
 const Register = () => {
     const dispatch = useDispatch();
     const [name, setName] = useState("");
@@ -12,7 +12,9 @@ const Register = () => {
     const [password, setPassword] = useState("");
     const [image, setImage] = useState();
     const [imagePrev, setImagePrev] = useState("")
-
+    const registerHandler = () => {
+        window.open(`${server}/googlelogin`, "_self")
+    }
     const fileUploadHandler = (e) => {
         const file = e.target.files[0];
 
@@ -74,7 +76,7 @@ const Register = () => {
             </div>
             <h2  className='text-center m-1'  >OR</h2>
             <div className='flex justify-center p-1 rounded-xl bg-red-600'>
-                <button className='flex justify-between'> <FcGoogle className='text-2xl'  /> <p className='font-bold' >Continue with Google </p> </button>
+                <button type='button' onClick={registerHandler} className='flex justify-between'> <FcGoogle className='text-2xl'  /> <p className='font-bold' >Continue with Google </p> </button>
             </div>
             
         </form>

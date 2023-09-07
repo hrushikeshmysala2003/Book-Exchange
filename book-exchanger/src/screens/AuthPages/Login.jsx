@@ -2,14 +2,18 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import {Link} from "react-router-dom"
 import { loadUser, loginUser } from '../../redux/actions/user'
+import {server} from "../../redux/store"
 import { FcGoogle } from "react-icons/fc";
 import toast from "react-hot-toast";
+
 
 const Login = () => {
     const dispatch = useDispatch();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    
+    const loginHandler = () => {
+        window.open(`${server}/googlelogin`, "_self")
+    }
     const submitHandler = (e) => {
         e.preventDefault();
 
@@ -50,7 +54,7 @@ const Login = () => {
             </div>
             <h2  className='text-center m-1'  >OR</h2>
             <div className='flex justify-center p-1 rounded-xl bg-red-600'>
-                <button className='flex justify-between'> <FcGoogle className='text-2xl'  /> <p className='font-bold' >Continue with Google </p> </button>
+                <button type='button' onClick={loginHandler} className='flex justify-between'> <FcGoogle className='text-2xl'  /> <p className='font-bold' >Continue with Google </p> </button>
             </div>
         </form>
 
