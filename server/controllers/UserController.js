@@ -28,9 +28,9 @@ exports.registerUser = async (req, res, next) => {
             password: password,
             avatar: {
                 public_id: mycloud.public_id,
-                url: mycloud.url
-            }
-            
+                url: mycloud.url,
+            },
+            googleId: email,
         });
 
         const token = await user.getJwtToken();
