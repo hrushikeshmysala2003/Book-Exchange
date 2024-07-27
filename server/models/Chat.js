@@ -14,7 +14,8 @@ const chatSchema = mongoose.Schema({
   messages: [
     {
       senderName: {
-        type: String,
+        type: mongoose.Schema.ObjectId,
+        ref: "User",
         required: [true, "Message must have a sender name"],
       },
       text: {
