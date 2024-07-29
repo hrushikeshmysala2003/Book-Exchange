@@ -2,6 +2,7 @@ const app = require("./app");
 const port = process.env.PORT || 5000;
 const cloudinary = require("cloudinary").v2;
 const connetToDB = require("./db");
+const Chat = require("./models/Chat");
 const { Server } = require("socket.io");
 const server = require("http").createServer(app);
 
@@ -21,7 +22,18 @@ io.on("connection", (socket) => {
     // socket.join(roomId);
   });
 
-  // socket.on("send-message", ())
+  socket.on("message", async ({ roomId, userId, userName, message }) => {
+    console.log(message);
+    const chat = await Chat.findOne({ roomName: roomId });
+    console.log(chat);
+    chat.messages.push({
+      senderId: userId,
+      senderName: userName,
+      text: message,
+    });
+    await chat.save();
+    io.to(roomId).emit("receive-message", { message, userName, userId });
+  });
 
   socket.on("disconnect", () => {
     console.log("User had left");

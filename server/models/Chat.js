@@ -13,9 +13,13 @@ const chatSchema = mongoose.Schema({
   },
   messages: [
     {
-      senderName: {
+      senderId: {
         type: mongoose.Schema.ObjectId,
         ref: "User",
+        required: [true, "Message must have a sender name"],
+      },
+      senderName: {
+        type: String,
         required: [true, "Message must have a sender name"],
       },
       text: {

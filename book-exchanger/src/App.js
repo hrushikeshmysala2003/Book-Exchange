@@ -82,17 +82,7 @@ function App() {
             path="/addbook"
             element={isAuthenticated ? <Addbook user={user} /> : <Login />}
           />
-          <Route
-            path="/chat/:roomId"
-            element={
-              <ProtectedRoute
-                isAuthenticated={!isAuthenticated}
-                redirect="/login"
-              >
-                <Chat />
-              </ProtectedRoute>
-            }
-          />
+          <Route path="/chat/:roomId" element={<Chat />} />
         </Routes>
         <Toaster />
       </div>
