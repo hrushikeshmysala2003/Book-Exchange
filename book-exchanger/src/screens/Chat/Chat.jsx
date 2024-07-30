@@ -46,7 +46,7 @@ const Chat = () => {
     <div className=" p-3 h-screen w-screen flex items-center justify-center flex-col">
       <div
         id="messageContainer"
-        className=" rounded-md h-2/3 overflow-y-scroll flex flex-col gap-y-2 w-full py-3 sm:w-1/2 md:w-2/3 lg:w-1/3 border border-blue-400"
+        className=" rounded-md h-full sm:h-2/3 overflow-y-scroll flex flex-col gap-y-2 w-full  py-3 sm:w-1/2 md:w-2/3 lg:w-1/3 border border-blue-400"
       >
         {user?._id && messages ? (
           messages?.map((message, index) => {

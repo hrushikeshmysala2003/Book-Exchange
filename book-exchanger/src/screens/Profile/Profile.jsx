@@ -1,10 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 // import "./profile.css"
 import Navbar from "../../components/Navbar";
+import { useDispatch, useSelector } from "react-redux";
+import { myBooks } from "../../redux/actions/profile";
+import toast from "react-hot-toast";
 
 const Profile = ({ user }) => {
   console.log(user);
+  const dispatch = useDispatch();
+
+  const { loading, mybook, message, error } = useSelector(
+    (state) => state.profile
+  );
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+      dispatch({ type: "clearError" });
+    }
+    if (message) {
+      toast.success(message);
+      dispatch({ type: "clearMessage" });
+    }
+  }, [dispatch, message, error]);
+
+  useEffect(() => {
+    dispatch(myBooks(user._id));
+  }, []);
+
+  console.log(mybook);
   const book = {
     _id: "66a7b1c0fb23b8dc1e3d9631",
     title: "Computer science",

@@ -1,22 +1,25 @@
-import {createReducer} from "@reduxjs/toolkit"
+import { createReducer } from "@reduxjs/toolkit";
 
-export const bookReducer = createReducer({},{
+export const bookReducer = createReducer(
+  {},
+  {
     addBookRequest: (state) => {
-        state.loading = true;
+      state.loading = true;
     },
     addBookSuccess: (state, action) => {
-        state.loading = false;
-        state.book = action.payload.book;
-        state.message = action.payload.message;
+      state.loading = false;
+      state.book = action.payload.book;
+      state.message = action.payload.message;
     },
     addBookFail: (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
+      state.loading = false;
+      state.error = action.payload;
     },
     clearError: (state) => {
-        state.error=null;
+      state.error = null;
     },
-    clearMessage: (state) => { 
-        state.message=null;
-    }
-})
+    clearMessage: (state) => {
+      state.message = null;
+    },
+  }
+);
