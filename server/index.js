@@ -17,22 +17,26 @@ io.on("connection", (socket) => {
   console.log("User Connected");
   console.log("ID", socket.id);
 
-  socket.on("joinRoom", (roomId) => {
-    console.log(`${socket.id} joined room ${roomId}`);
-    // socket.join(roomId);
+  socket.on("joinRoom", async (roomId) => {
+    console.log(roomId);
+    const chat = await Chat.findOne({ roomName: roomId });
+    socket.emit("receive-message", chat);
+    socket.join(roomId);
   });
 
-  socket.on("message", async ({ roomId, userId, userName, message }) => {
-    console.log(message);
+  socket.on("message", async ({ roomId, user, message }) => {
+    // console.log({ message, user, roomId });
+    if (message.length === 0) return;
     const chat = await Chat.findOne({ roomName: roomId });
     console.log(chat);
+
     chat.messages.push({
-      senderId: userId,
-      senderName: userName,
+      senderId: user._id,
+      senderName: user.name,
       text: message,
     });
     await chat.save();
-    io.to(roomId).emit("receive-message", { message, userName, userId });
+    io.to(roomId).emit("receive-message", chat);
   });
 
   socket.on("disconnect", () => {
