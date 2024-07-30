@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 
 const Profile = ({ user }) => {
+  console.log(user);
   const book = {
     _id: "66a7b1c0fb23b8dc1e3d9631",
     title: "Computer science",
@@ -25,35 +26,19 @@ const Profile = ({ user }) => {
     <div className="">
       <Navbar />
       <div className="max-h-screen pt-20 grid grid-cols-1 md:grid-cols-2 sm:overflow-hidden">
-        <div>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi magnam
-          eligendi maxime tempore recusandae vitae, provident sapiente impedit
-          reprehenderit eius temporibus inventore, ipsa natus exercitationem ut
-          similique sequi ullam? Aspernatur facere ut culpa nemo odit nesciunt
-          quaerat voluptatem libero earum! Non debitis ea, iusto nesciunt
-          incidunt repellendus consequuntur accusantium, veritatis odit eos
-          nulla! Incidunt exercitationem, animi quia pariatur officiis
-          consequatur quam consequuntur obcaecati quas, quae voluptate
-          recusandae nisi ratione in qui magnam voluptatibus tempora ab cum quis
-          doloribus aut delectus nesciunt temporibus! Officiis delectus
-          laboriosam vitae repudiandae ut. Ipsum voluptatum id, optio sed
-          reprehenderit vitae, a dolorem, iste vel rem tenetur distinctio quo
-          sequi dolorum cumque praesentium commodi minus aspernatur. Aperiam
-          magnam nobis tenetur, temporibus praesentium harum? Atque in quae
-          voluptatum delectus harum, beatae ad nostrum molestias qui magnam sed
-          voluptates aliquam quaerat sunt hic, alias nobis nulla eum corporis
-          fuga enim saepe. Ut sapiente officiis distinctio harum ab qui labore
-          possimus recusandae beatae esse natus porro animi inventore enim
-          omnis, perspiciatis necessitatibus officia quae nesciunt repellendus
-          voluptate nam obcaecati. Eveniet ipsa quaerat temporibus voluptatum
-          ratione ipsum provident perspiciatis labore qui optio consequuntur
-          magnam itaque expedita, impedit eaque maxime inventore cumque.
-          Voluptatem saepe magni debitis non laboriosam libero iste quod
-          consectetur magnam natus, modi similique molestiae quis totam tempora,
-          itaque tempore! Dolore aliquid aperiam commodi veniam suscipit, atque
-          quidem consequatur repudiandae, facilis velit incidunt quam facere
-          dolores laborum vero quis. Animi nemo necessitatibus quae architecto
-          perspiciatis culpa ipsa dolorem iusto blanditiis harum.
+        <div className="flex justify-center md:pt-24 m-5 p-2 font-bold text-lg ">
+          <div>
+            <div className="flex justify-center m-8 ">
+              <img
+                className="w-48 rounded-full "
+                src="https://res.cloudinary.com/dwna7axtx/image/upload/v1694172246/tumrwxojjfli9gs5qupc.png"
+                alt="Image"
+              />
+            </div>
+            <p>Name: {user.name}</p>
+            <p>email: {user.email}</p>
+            <p>created_at: {user.createdAt}</p>
+          </div>
         </div>
 
         <div className="max-h-screen overflow-y-scroll">
