@@ -22,6 +22,9 @@ const Profile = ({ user }) => {
     }
     if (message) {
       toast.success(message);
+      if (message === "User Updated Successfully") {
+        window.location.reload(false);
+      }
       dispatch({ type: "clearMessage" });
     }
   }, [dispatch, message, error]);

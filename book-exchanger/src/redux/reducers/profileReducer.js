@@ -9,7 +9,6 @@ export const profileReducer = createReducer(
     getMyBooksSuccess: (state, action) => {
       state.loading = false;
       state.mybook = action.payload.mybooks;
-      state.message = action.payload.message;
     },
     getMyBooksFail: (state, action) => {
       state.loading = false;
@@ -24,6 +23,17 @@ export const profileReducer = createReducer(
       state.message = action.payload.message;
     },
     getUserProfileFail: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+    updateProfileRequest: (state) => {
+      state.loading = true;
+    },
+    updateProfileSuccess: (state, action) => {
+      state.loading = false;
+      state.message = action.payload.message;
+    },
+    updateProfileFail: (state, action) => {
       state.loading = false;
       state.error = action.payload;
     },

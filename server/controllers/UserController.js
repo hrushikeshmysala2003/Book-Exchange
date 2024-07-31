@@ -145,6 +145,8 @@ exports.updateProfile = async (req, res, next) => {
     const { name, email } = req.body;
 
     let user = await User.findById(req.user._id);
+    console.log("Update Profile");
+    console.log(user);
 
     if (name) user.name = name;
     if (email) user.email = email;

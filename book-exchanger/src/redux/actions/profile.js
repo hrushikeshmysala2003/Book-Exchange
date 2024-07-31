@@ -47,3 +47,29 @@ export const getUserProfile = (userId) => async (dispatch) => {
     });
   }
 };
+
+export const updateProfile = (name, email) => async (dispatch) => {
+  try {
+    dispatch({ type: "updateProfileRequest" });
+
+    const { data } = await axios.put(
+      `${server}/updateprofile`,
+      {
+        name,
+        email,
+      },
+      {
+        withCredentials: true,
+      }
+    );
+    dispatch({
+      type: "updateProfileSuccess",
+      payload: { message: data.message },
+    });
+  } catch (err) {
+    dispatch({
+      type: "updateProfileFail",
+      payload: err.response.data.message,
+    });
+  }
+};
