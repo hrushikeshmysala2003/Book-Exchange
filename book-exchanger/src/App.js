@@ -14,6 +14,7 @@ import { loadUser } from "./redux/actions/user";
 import { ProtectedRoute } from "protected-route-react";
 import Profile from "./screens/Profile/Profile";
 import Chat from "./screens/Chat/Chat";
+import UserProfile from "./screens/Profile/UserProfile";
 
 function App() {
   const dispatch = useDispatch();
@@ -82,7 +83,8 @@ function App() {
             path="/addbook"
             element={isAuthenticated ? <Addbook user={user} /> : <Login />}
           />
-          <Route path="/chat/:roomId" element={<Chat />} />
+          <Route path="/chat/:roomId" element={<Chat user={user} />} />
+          <Route path="/profile/:userId" element={<UserProfile />} />
         </Routes>
         <Toaster />
       </div>

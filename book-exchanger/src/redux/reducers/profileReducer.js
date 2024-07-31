@@ -15,6 +15,18 @@ export const profileReducer = createReducer(
       state.loading = false;
       state.error = action.payload;
     },
+    getUserProfileRequest: (state) => {
+      state.loading = true;
+    },
+    getUserProfileSuccess: (state, action) => {
+      state.loading = false;
+      state.userProfile = action.payload.userProfile;
+      state.message = action.payload.message;
+    },
+    getUserProfileFail: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
     clearError: (state) => {
       state.error = null;
     },

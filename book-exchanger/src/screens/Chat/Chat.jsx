@@ -1,13 +1,13 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react"
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import io from "socket.io-client";
 
-const Chat = () => {
+const Chat = ({ user }) => {
   const socket = useMemo(() => io("http://localhost:5000"), []);
   const [message, setMessage] = useState("");
   const { roomId } = useParams();
-  const { user } = useSelector((state) => state.user);
+
   const [userId, setUserId] = useState("");
   const [userName, setUserName] = useState("");
 
@@ -65,7 +65,11 @@ const Chat = () => {
                   <p className="bg-blue-300 p-2 rounded-lg w-4/5 ">
                     {message.text}
                   </p>{" "}
-                  <p className="text-sm text-zinc-500 ">{message.senderName}</p>
+                  <p className="text-sm text-zinc-500 ">
+                    <Link to={`/profile/${messages._id}`}>
+                      {message.senderName}
+                    </Link>{" "}
+                  </p>
                 </div>
               );
             }
