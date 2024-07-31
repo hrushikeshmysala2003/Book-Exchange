@@ -5,14 +5,15 @@ export const myBooks = (userId) => async (dispatch) => {
   try {
     dispatch({ type: "getMyBooksRequest" });
 
-    const { data } = await axios.get(`${server}/getallbooks`, {
+    const { data } = await axios.get(`${server}/mybooks`, {
       withCredentials: true,
     });
+    console.log(data);
     dispatch({
       type: "getMyBooksSuccess",
       payload: {
         message: "Fetched your books succesfully",
-        mybooks: data.books,
+        mybooks: data.mybooks,
       },
     });
   } catch (error) {

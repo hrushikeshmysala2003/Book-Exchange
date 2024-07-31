@@ -98,8 +98,9 @@ exports.getAllbooks = async (req, res, next) => {
 exports.myBooks = async (req, res, next) => {
   try {
     const user = req.user;
+
     const mybooks = await Book.find({ user: user._id });
-    console.log("Yes request came");
+    console.log(mybooks);
     res.status(200).json({
       success: true,
       mybooks,

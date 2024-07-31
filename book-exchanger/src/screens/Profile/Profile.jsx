@@ -41,13 +41,14 @@ const Profile = ({ user }) => {
             <div className="flex justify-center m-5 sm:m-8 ">
               <img
                 className="w-48 rounded-full "
-                src="https://res.cloudinary.com/dwna7axtx/image/upload/v1694172246/tumrwxojjfli9gs5qupc.png"
+                src={user.avatar.url}
                 alt="Image"
               />
             </div>
             <p>Name: {user.name}</p>
             <p>email: {user.email}</p>
             <p>created_at: {user.createdAt}</p>
+            {user.phoneNumber ? <p>PhoneNumber: {user.phoneNumber}</p> : null}
           </div>
         </div>
 

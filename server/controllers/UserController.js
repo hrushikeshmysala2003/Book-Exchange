@@ -7,11 +7,11 @@ const jwt = require("jsonwebtoken");
 
 exports.registerUser = async (req, res, next) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password, phoneNumber } = req.body;
 
     const file = req.file;
 
-    if (!name || !email || !password || !file) {
+    if (!name || !email || !password || !file || !phoneNumber) {
       return next(new ErrorHandler("Please enter all fields", 400));
     }
 
@@ -26,6 +26,7 @@ exports.registerUser = async (req, res, next) => {
       name: name,
       email: email,
       password: password,
+      phoneNumber: phoneNumber,
       avatar: {
         public_id: mycloud.public_id,
         url: mycloud.url,
