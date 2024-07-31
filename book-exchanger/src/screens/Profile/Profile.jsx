@@ -36,19 +36,36 @@ const Profile = ({ user }) => {
     <div className="">
       <Navbar />
       <div className="max-h-screen pt-20 grid grid-cols-1 md:grid-cols-2 sm:overflow-hidden">
-        <div className="flex justify-center  md:pt-24 m-2 sm:m-5 p-2 font-bold text-lg ">
+        <div className="flex justify-center  md:pt-8  m-2 sm:m-5 p-2 font-bold text-lg ">
           <div>
-            <div className="flex justify-center m-5 sm:m-8 ">
-              <img
-                className="w-48 rounded-full "
-                src={user.avatar.url}
-                alt="Image"
-              />
+            <div className="flex flex-col justify-center m-5 sm:m-8 gap-3 ">
+              <div className="w-full flex justify-center">
+                <img
+                  className="w-48 rounded-full justify-self-center"
+                  src={user.avatar.url}
+                  alt="Image"
+                />
+              </div>
+              <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                Change Profile Picture
+              </button>
             </div>
             <p>Name: {user.name}</p>
             <p>email: {user.email}</p>
             <p>created_at: {user.createdAt}</p>
             {user.phoneNumber ? <p>PhoneNumber: {user.phoneNumber}</p> : null}
+            <div className=" flex gap-2 ">
+              <Link to={"/updateprofile"}>
+                <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                  Update Profile
+                </button>
+              </Link>
+              <Link to={"/changepassword"}>
+                <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                  Change Password
+                </button>
+              </Link>
+            </div>
           </div>
         </div>
 

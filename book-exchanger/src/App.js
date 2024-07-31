@@ -15,6 +15,7 @@ import { ProtectedRoute } from "protected-route-react";
 import Profile from "./screens/Profile/Profile";
 import Chat from "./screens/Chat/Chat";
 import UserProfile from "./screens/Profile/UserProfile";
+import UpdateProfile from "./screens/AuthPages/UpdateProfile";
 
 function App() {
   const dispatch = useDispatch();
@@ -85,6 +86,7 @@ function App() {
           />
           <Route path="/chat/:roomId" element={<Chat user={user} />} />
           <Route path="/profile/:userId" element={<UserProfile />} />
+          <Route path="/updateprofile" element={<UpdateProfile />} />
         </Routes>
         <Toaster />
       </div>
